@@ -1,0 +1,38 @@
+package SeleniumLesson;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.interactions.Actions;
+import org.testng.annotations.Test;
+
+@Test
+public class drag {
+    public static void main(String[] args) throws InterruptedException {
+        System.setProperty("webdriver.chrome.driver", "D:\\All Learnings\\Selenium1\\chromedriver_win32 V.111\\chromedriver.exe");
+        ChromeOptions option = new ChromeOptions();
+        option.addArguments("--remote-allow-origins=*", "ignore-certificate-errors");
+        WebDriver driver = new ChromeDriver(option);
+        driver.get("https://jqueryui.com/droppable/");
+
+        Actions act = new Actions(driver);
+
+        driver.manage().window().maximize();
+        Thread.sleep(3000);
+        driver.findElement(By.tagName("iframe"));
+        driver.switchTo().frame(0);
+        Thread.sleep(1000);
+
+        WebElement src = driver.findElement(By.id("draggable"));
+        WebElement trg = driver.findElement(By.id("droppable"));
+        act.dragAndDrop(src, trg).perform();
+
+        if (trg.getText().matches("Dropped!"))
+        {
+            System.out.println("Successfully Dropped..");
+        }
+
+    }
+}
