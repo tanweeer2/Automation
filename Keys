@@ -1,0 +1,35 @@
+package SeleniumLesson;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.interactions.Actions;
+
+public class Keys {
+
+    public static void main(String[] args) throws InterruptedException {
+        System.setProperty("webdriver.chrome.driver", "D:\\All Learnings\\Selenium1\\chromedriver_win32 V.111\\chromedriver.exe");
+        ChromeOptions option = new ChromeOptions();
+        option.addArguments("--remote-allow-origins=*", "ignore-certificate-errors");
+        WebDriver driver = new ChromeDriver(option);
+        driver.get("https://www.tesco.com/account/login/en-GB");
+        driver.manage().window().maximize();
+        driver.findElement(By.xpath("//span[contains(text(),'Accept all cookies')]")).click();
+        Actions act = new Actions(driver);
+        driver.findElement(By.name("email")).sendKeys("hn4ahmad@hotmail.com");
+        act.click(driver.findElement(By.name("email")))
+                .keyDown(org.openqa.selenium.Keys.CONTROL)
+                .sendKeys("a")
+                .sendKeys("c")
+                .keyUp(org.openqa.selenium.Keys.CONTROL)
+                .click(driver.findElement(By.name("password")))
+                .keyDown(org.openqa.selenium.Keys.CONTROL)
+                .sendKeys("v")
+                .keyUp(org.openqa.selenium.Keys.CONTROL)
+                .build()
+                .perform();
+                driver.findElement(By.xpath("//span[contains(text(),'Sign in')]")).click();
+
+    }
+}
