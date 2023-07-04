@@ -1,0 +1,28 @@
+package SeleniumLesson;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.interactions.Actions;
+
+public class doubleclick {
+    public static void main(String[] args) throws InterruptedException {
+        System.setProperty("webdriver.chrome.driver", "D:\\All Learnings\\Selenium1\\chromedriver_win32 V.111\\chromedriver.exe");
+        ChromeOptions option = new ChromeOptions();
+        option.addArguments("--remote-allow-origins=*","ignore-certificate-errors");
+        WebDriver driver = new ChromeDriver(option);
+        driver.get("https://www.amazon.co.uk/");
+        driver.manage().window().maximize();
+        Thread.sleep(3000);
+        driver.findElement(By.xpath("//input[@id='sp-cc-accept']")).click();
+        Actions act = new Actions(driver);
+        WebElement signin = driver.findElement(By.xpath("//span[@id='nav-link-accountList-nav-line-1']"));
+        //act.moveToElement(signin).doubleClick().build().perform();
+        //act.doubleClick(signin).build().perform();
+        //act.moveToElement(signin).contextClick().build().perform();
+        act.contextClick(signin).perform();
+
+    }
+}
